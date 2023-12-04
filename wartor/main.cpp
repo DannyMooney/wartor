@@ -52,8 +52,8 @@ public:
      * @brief Move the fish to random position
      */
     void move(std::vector<Fish>& all, int Width, int Height, int grid) {
-        int randomx = rand() % 3 - 1;
-        int randomy = rand() % 3 - 1; 
+        int randomx = rand() % 4- 1;
+        int randomy = rand() % 4 - 1; 
 
         int X = (position.x + randomx + Width / grid) % (Width / grid);
         int Y = (position.y + randomy + Height / grid) % (Height / grid);
@@ -96,8 +96,8 @@ public:
         energy = starve;
     }
     void move(std::vector<Fish>& fishes, int Width, int Height, int grid) {
-        int randx = rand() % 3 - 1; 
-        int randy = rand() % 3 - 1;
+        int randx = rand() % 4 - 1; 
+        int randy = rand() % 4 - 1;
         position.x = (position.x + randx + Width / grid) % (Width / grid);
         position.y = (position.y + randy + Height / grid) % (Height / grid);
         shape.setPosition(position.x * grid, position.y * grid);
@@ -130,9 +130,9 @@ public:
  */
 void saveResultsToCSV(const std::vector<SimulationResult>& results) {
     std::ofstream outputFile("results.csv");
-    outputFile << "Threads,ExecutionTime\n";
+    outputFile << "Threads,Time\n";
     for (const Results& result : results) {
-        outputFile << result.numThreads << "," << result.Time << "\n";
+        outputFile << result.num << "," << result.Time << "\n";
     }
     outputFile.close();
 }
@@ -187,7 +187,7 @@ void updateSharks(std::vector<Shark>& sharks, std::vector<Fish>& fishes, int sha
  * @brief the main part of code to show the SFML and saveing the file and using the code for Fish and Sharks
  */
 int main() {
-    sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Wator Simulation");
+    sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Wator");
     std::vector<Fish> fishes;
     std::vector<Shark> sharks;
     std::srand(static_cast<unsigned>(std::time(nullptr)));
@@ -234,12 +234,12 @@ int main() {
             }
             window.display();
         }
-        double endTime = omp_get_wtime();
-        double executionTime = endTime - startTime;
-        std::cout << "Threads: " << numThreads << ", Execution Time: " << executionTime << " seconds" << std::endl;
+        double end = omp_get_wtime();
+        double Time = endTime - startTime;
+        std::cout << "Threads: " << num << ", Time: " << Time << " seconds" << std::endl;
         Results result;
-        result.numThreads = numThreads;
-        result.executionTime = executionTime;
+        result.num = num;
+        result.Time = Time;
         results.push_back(result);
         fishes.clear();
         sharks.clear();
