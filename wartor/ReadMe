@@ -1,0 +1,21 @@
+# Wa-Tor Simulation
+
+A Wa-Tor simulation using C++ and OpenMP.
+
+requirements
+
+- GCC compiler
+- SFML library (for graphical output)
+
+Compilation
+
+To compile the project, use the following command:
+
+g++ main.cpp -o wator -lsfml-graphics -lsfml-window -lsfml-system -lgomp
+./wator
+
+and to get graph results
+g++ graph.cpp -o graph_executable -lsfml-graphics -lsfml-window -lsfml-system -lgomp
+./graph
+
+

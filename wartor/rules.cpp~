@@ -1,0 +1,48 @@
+// rules.cpp
+#include "rules.h"
+#include "fish.h"
+#include "shark.h"
+#include "parameters.h"
+#include <vector>
+
+void applyRules(std::vector<std::vector<Fish>>& grid, std::vector<std::vector<Shark>>& sharkGrid) {
+    // Create a copy of the grid to track fish and shark movements
+    std::vector<std::vector<Fish>> newFishGrid(GridSize.x, std::vector<Fish>(GridSize.y, { 0, false, 0 }));
+    std::vector<std::vector<Shark>> newSharkGrid(GridSize.x, std::vector<Shark>(GridSize.y, { 0, 0, false, 0 }));
+
+    // Apply rules for fish
+    for (int x = 0; x < GridSize.x; ++x) {
+        for (int y = 0; y < GridSize.y; ++y) {
+            if (grid[x][y].chrononsSurvived >= FishBreed && grid[x][y].lifetime < FishLifespan) {
+                moveFish(newFishGrid, x, y);
+                newFishGrid[x][y].chrononsSurvived = 0; // Reset reproduction time
+            } else {
+                moveFish(newFishGrid, x, y);
+            }
+        }
+    }
+
+    // Apply rules for sharks
+    for (int x = 0; x < GridSize.x; ++x) {
+        for (int y = 0; y < GridSize.y; ++y) {
+            if (sharkGrid[x][y].chrononsSurvived >= SharkBreed && sharkGrid[x][y].lifetime < SharkLifespan) {
+                moveShark(newFishGrid, newSharkGrid, x, y);
+                newSharkGrid[x][y].chrononsSurvived = 0; // Reset reproduction time
+            } else {
+                moveShark(newFishGrid, newSharkGrid, x, y);
+            }
+
+            // Shark energy management
+            newSharkGrid[x][y].energy--;
+
+            // If a shark runs out of energy, it dies
+            if (newSharkGrid[x][y].energy <= 0) {
+                newSharkGrid[x][y] = { 0, 0, false, newSharkGrid[x][y].lifetime + 1 };
+            }
+        }
+    }
+
+    // Copy the updated grids back to the original grids
+    grid = newFishGrid;
+    sharkGrid = newSharkGrid;
+}

@@ -1,0 +1,12 @@
+
+void updateFish(std::vector<Fish>& fishes, int start, int end) {
+    for (int i = start; i < end; i++) {
+        fishes[i].move();
+    }
+}
+
+void updateSharks(std::vector<Shark>& sharks, std::vector<Fish>& fishes, int start, int end) {
+    for (int i = start; i < end; i++) {
+        sharks[i].move(fishes);
+    }
+}

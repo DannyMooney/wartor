@@ -1,0 +1,11 @@
+// parameters.cpp
+#include "parameters.h"
+
+int NumFish = 100;            // Starting population of fish
+int NumShark = 10;            // Starting population of sharks
+int FishBreed = 3;           // Number of chronons for fish to reproduce
+int SharkBreed = 5;          // Number of chronons for sharks to reproduce
+int FishLifespan = 10;       // Lifespan of fish
+int SharkLifespan = 20;      // Lifespan of sharks
+int Starve = 5;              // Chronons a shark can go without food before dying
+sf::Vector2i GridSize(50, 50);  // Dimensions of the world

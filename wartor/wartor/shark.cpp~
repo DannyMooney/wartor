@@ -1,0 +1,40 @@
+// shark.cpp
+#include "shark.h"
+#include "parameters.h"
+#include <vector>
+#include <cstdlib>
+
+void moveShark(std::vector<std::vector<Fish>>& grid, std::vector<std::vector<Shark>>& sharkGrid, int x, int y) {
+    int dx, dy;
+    bool foundFish = false;
+
+    // Search for adjacent fish
+    for (dx = -1; dx <= 1 && !foundFish; ++dx) {
+        for (dy = -1; dy <= 1 && !foundFish; ++dy) {
+            int newX = x + dx;
+            int newY = y + dy;
+            if (newX >= 0 && newX < GridSize.x && newY >= 0 && newY < GridSize.y && grid[newX][newY].chrononsSurvived == 0) {
+                // Found an adjacent fish, eat it
+                grid[newX][newY] = { 0, false, grid[x][y].lifetime + 1 };
+                grid[x][y] = { grid[x][y].canReproduce ? 0 : grid[x][y].chrononsSurvived + 1, false, grid[x][y].lifetime + 1 };
+                sharkGrid[x][y].energy++; // Gain energy
+                foundFish = true;
+            }
+        }
+    }
+
+    if (!foundFish) {
+        // No adjacent fish, move randomly
+        int newX, newY;
+        do {
+            dx = std::rand() % 3 - 1;
+            dy = std::rand() % 3 - 1;
+            newX = x + dx;
+            newY = y + dy;
+        } while (newX < 0 || newX >= GridSize.x || newY < 0 || newY >= GridSize.y || grid[newX][newY].chrononsSurvived > 0);
+
+        // Move to the new empty square
+        sharkGrid[newX][newY] = sharkGrid[x][y];
+        sharkGrid[newX][newY] = { grid[x][y].canReproduce ? 0 : grid[x][y].chrononsSurvived + 1, sharkGrid[x][y].energy - 1, grid[x][y].lifetime + 1 };
+    }
+}

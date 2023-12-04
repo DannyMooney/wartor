@@ -1,0 +1,52 @@
+
+class Shark {
+public:
+    sf::RectangleShape shape;
+    sf::Vector2i position;
+    int breedTimer;
+    int starveTimer;
+
+    Shark(int x, int y) {
+        shape.setSize(sf::Vector2f(gridSize, gridSize));
+        shape.setFillColor(sf::Color::Red);
+        position.x = x;
+        position.y = y;
+        shape.setPosition(x * gridSize, y * gridSize);
+        breedTimer = sharkBreed;
+        starveTimer = starve;
+    }
+
+    void move(std::vector<Fish>& fishes) {
+        int dx = rand() % 3 - 1; // -1, 0, or 1
+        int dy = rand() % 3 - 1; // -1, 0, or 1
+
+        position.x += dx;
+        position.y += dy;
+
+        // Wrap around the grid
+        position.x = (position.x + windowWidth / gridSize) % (windowWidth / gridSize);
+        position.y = (position.y + windowHeight / gridSize) % (windowHeight / gridSize);
+
+        shape.setPosition(position.x * gridSize, position.y * gridSize);
+        breedTimer--;
+        starveTimer--;
+
+        if (breedTimer <= 0) {
+            breedTimer = sharkBreed;
+        }
+
+        // Check for nearby fish to eat
+	for (std::vector<Fish>::size_type i = 0; i < fishes.size(); ++i) {            if (position.x == fishes[i].position.x && position.y == fishes[i].position.y) {
+                starveTimer = starve;
+                fishes.erase(fishes.begin() + i);
+                break;
+            }
+        }
+
+        // If starved, remove the shark
+        if (starveTimer <= 0) {
+            starveTimer = starve;
+            position.x = -1; // Mark for removal
+        }
+    }
+};

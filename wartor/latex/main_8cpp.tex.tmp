@@ -1,0 +1,76 @@
+\hypertarget{main_8cpp}{}\doxysection{main.\+cpp File Reference}
+\label{main_8cpp}\index{main.cpp@{main.cpp}}
+
+
+Wa-\/\+Tor simulation.  
+
+
+{\ttfamily \#include $<$SFML/\+Graphics.\+hpp$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$ctime$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$omp.\+h$>$}\newline
+Include dependency graph for main.\+cpp\+:
+% FIG 0
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structSimulationResult}{Simulation\+Result}}
+\begin{DoxyCompactList}\small\item\em The \mbox{\hyperlink{structSimulationResult}{Simulation\+Result}} is for running the simulation. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classFish}{Fish}}
+\begin{DoxyCompactList}\small\item\em The \mbox{\hyperlink{classFish}{Fish}} class for everything the fish needs. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classShark}{Shark}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classShark}{Shark}} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{main_8cpp_affc2d5845c3b71065444e49275de93e3}\label{main_8cpp_affc2d5845c3b71065444e49275de93e3}} 
+void \mbox{\hyperlink{main_8cpp_affc2d5845c3b71065444e49275de93e3}{save\+Results\+To\+CSV}} (const std\+::vector$<$ \mbox{\hyperlink{structSimulationResult}{Simulation\+Result}} $>$ \&results)
+\begin{DoxyCompactList}\small\item\em handling the save of the results and the file name \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{main_8cpp_aa761c4b0486558fc884e7d2da23152d7}\label{main_8cpp_aa761c4b0486558fc884e7d2da23152d7}} 
+void \mbox{\hyperlink{main_8cpp_aa761c4b0486558fc884e7d2da23152d7}{update\+Fish}} (std\+::vector$<$ \mbox{\hyperlink{classFish}{Fish}} $>$ \&fishes, int fish\+Breed, int window\+Width, int window\+Height, int \mbox{\hyperlink{main_8cpp_a4b16bb042891838996c6db35e71e951b}{grid\+Size}})
+\begin{DoxyCompactList}\small\item\em Update the fish for the position time and death. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{main_8cpp_a4f5c4d9b58a2dad480353782e4636229}\label{main_8cpp_a4f5c4d9b58a2dad480353782e4636229}} 
+void \mbox{\hyperlink{main_8cpp_a4f5c4d9b58a2dad480353782e4636229}{update\+Sharks}} (std\+::vector$<$ \mbox{\hyperlink{classShark}{Shark}} $>$ \&sharks, std\+::vector$<$ \mbox{\hyperlink{classFish}{Fish}} $>$ \&fishes, int shark\+Breed, int window\+Width, int window\+Height, int \mbox{\hyperlink{main_8cpp_a4b16bb042891838996c6db35e71e951b}{grid\+Size}}, int starve)
+\begin{DoxyCompactList}\small\item\em Update the sharks for timer and position and breed time. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+int \mbox{\hyperlink{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em the main part of code to show the SFML and saveing the file and using the code for \mbox{\hyperlink{classFish}{Fish}} and Sharks \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{main_8cpp_a4b16bb042891838996c6db35e71e951b}\label{main_8cpp_a4b16bb042891838996c6db35e71e951b}} 
+int \mbox{\hyperlink{main_8cpp_a4b16bb042891838996c6db35e71e951b}{grid\+Size}} = 4
+\begin{DoxyCompactList}\small\item\em the variables \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{main_8cpp_aa61000540636bfdc4c9f27045ab84ce9}\label{main_8cpp_aa61000540636bfdc4c9f27045ab84ce9}} 
+int {\bfseries window\+Width} = 800
+\item 
+\mbox{\Hypertarget{main_8cpp_af140802328ffe8a45749114b1c5a2056}\label{main_8cpp_af140802328ffe8a45749114b1c5a2056}} 
+int {\bfseries window\+Height} = 800
+\item 
+\mbox{\Hypertarget{main_8cpp_a7620373a51a8e56751d7eaf23a91a405}\label{main_8cpp_a7620373a51a8e56751d7eaf23a91a405}} 
+int {\bfseries num\+Fish} = 200
+\item 
+\mbox{\Hypertarget{main_8cpp_a43a03c04a91bc782025008b1d944cbe3}\label{main_8cpp_a43a03c04a91bc782025008b1d944cbe3}} 
+int {\bfseries num\+Sharks} = 200
+\item 
+\mbox{\Hypertarget{main_8cpp_a698d64c39d139b47bf8f1640d821b8b6}\label{main_8cpp_a698d64c39d139b47bf8f1640d821b8b6}} 
+int {\bfseries fish\+Breed} = 20
+\item 
+\mbox{\Hypertarget{main_8cpp_afe6bb1e77490b7b4d687dfebbffc0cba}\label{main_8cpp_afe6bb1e77490b7b4d687dfebbffc0cba}} 
+int {\bfseries shark\+Breed} = 20
+\item 
+\mbox{\Hypertarget{main_8cpp_a125942fd3e9a284342cf3b02c96b00fd}\label{main_8cpp_a125942fd3e9a284342cf3b02c96b00fd}} 
+int {\bfseries starve} = 20
+\item 
+\mbox{\Hypertarget{main_8cpp_ad6621c9c33532eb4332e60ecb5730c6f}\label{main_8cpp_ad6621c9c33532eb4332e60ecb5730c6f}} 
+int {\bfseries max\+Threads} = 24
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Wa-\/\+Tor simulation. 
+

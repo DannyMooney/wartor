@@ -1,0 +1,16 @@
+#include "fish.h"
+#include "parameters.h"
+#include <vector>
+#include <cstdlib>
+
+void moveFish(std::vector<std::vector<Fish>>& grid, int x, int y) {
+    int dx = std::rand() % 3 - 1;
+    int dy = std::rand() % 3 - 1;
+    int newX = x + dx;
+    int newY = y + dy;
+
+    if (newX >= 0 && newX < GridSize.x && newY >= 0 && newY < GridSize.y && grid[newX][newY].chrononsSurvived == 0) {
+        grid[newX][newY] = { 0, false, grid[x][y].lifetime + 1 };
+        grid[x][y] = { grid[x][y].canReproduce ? 0 : grid[x][y].chrononsSurvived + 1, false, grid[x][y].lifetime + 1 };
+    }
+}

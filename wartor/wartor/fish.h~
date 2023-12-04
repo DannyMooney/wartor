@@ -1,0 +1,35 @@
+
+class Fish {
+public:
+    sf::RectangleShape shape;
+    sf::Vector2i position;
+    int breedTimer;
+
+    Fish(int x, int y) {
+        shape.setSize(sf::Vector2f(gridSize, gridSize));
+        shape.setFillColor(sf::Color::Blue);
+        position.x = x;
+        position.y = y;
+        shape.setPosition(x * gridSize, y * gridSize);
+        breedTimer = fishBreed;
+    }
+
+    void move() {
+        int dx = rand() % 3 - 1; // -1, 0, or 1
+        int dy = rand() % 3 - 1; // -1, 0, or 1
+
+        position.x += dx;
+        position.y += dy;
+
+        // Wrap around the grid
+        position.x = (position.x + windowWidth / gridSize) % (windowWidth / gridSize);
+        position.y = (position.y + windowHeight / gridSize) % (windowHeight / gridSize);
+
+        shape.setPosition(position.x * gridSize, position.y * gridSize);
+        breedTimer--;
+
+        if (breedTimer <= 0) {
+            breedTimer = fishBreed;
+        }
+    }
+};
